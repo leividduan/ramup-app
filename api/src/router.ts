@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { test } from './useCases/test';
+import { signin } from './useCases/auth/signin';
 
 export const router = Router();
 
-router.get('/categories', test);
+router.get('/auth/signin', signin);
