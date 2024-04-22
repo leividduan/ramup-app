@@ -5,7 +5,7 @@ import { generateAccessToken } from '../services/generateAccessToken';
 
 export async function signin(req: Request, res: Response) {
   try {
-    const {name, email, password} = req.body;
+    const {name, email, birthday, password} = req.body;
     const userWithSameEmail = await db.user.findUnique({where: {
       email: email
     }});
@@ -16,8 +16,9 @@ export async function signin(req: Request, res: Response) {
 
     const user = await db.user.create({
       data:{
-        name: name,
-        email: email,
+        name,
+        email,
+        birthday: new Date(birthday),
         password: await hash(password, 12)
       }});
 

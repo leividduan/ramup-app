@@ -5,13 +5,46 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  name       String
-  password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id        Int         @id @default(autoincrement())
+  email     String      @unique
+  name      String
+  password  String
+  birthday  DateTime    @db.Date
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  events    UserEvent[]
+
+  @@map("users")
+}
+
+model Event {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String
+  city        String
+  state       String
+  country     String
+  zipCode     String
+  onlyAdults  Boolean
+  showUsers   Boolean
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  users       UserEvent[]
+
+  @@map("events")
+}
+
+model UserEvent {
+  id        Int      @id @default(autoincrement())
+  userId    Int?
+  eventId   Int?
+  createdAt DateTime @default(now())
+  event     Event?   @relation(fields: [eventId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@map("userEvents")
 }
