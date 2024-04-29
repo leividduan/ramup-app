@@ -15,6 +15,7 @@ export function validateJwt(req: Request, res: Response, next: NextFunction) {
   if (token == null) return res.sendStatus(401);
 
   jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
+    (req as CustomRequest).user = user;
 
     if (err){
       console.log(err);
