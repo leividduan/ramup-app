@@ -8,21 +8,21 @@ datasource db {
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
-  email      String      @unique
+  id         Int          @id @default(autoincrement())
+  email      String       @unique
   name       String
   password   String
-  birthday   DateTime    @db.Date
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  birthday   DateTime     @db.Date
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  eventUsers EventUsers[]
   events     Event[]
-  userEvents UserEvent[]
 
   @@map("users")
 }
 
 model Event {
-  id          Int         @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   name        String
   description String
   city        String
@@ -31,16 +31,16 @@ model Event {
   zipCode     String
   onlyAdults  Boolean
   showUsers   Boolean
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   userId      Int
-  user        User        @relation(fields: [userId], references: [id])
-  userEvents  UserEvent[]
+  eventUsers  EventUsers[]
+  user        User         @relation(fields: [userId], references: [id])
 
   @@map("events")
 }
 
-model UserEvent {
+model EventUsers {
   id        Int      @id @default(autoincrement())
   userId    Int?
   eventId   Int?
@@ -48,5 +48,5 @@ model UserEvent {
   event     Event?   @relation(fields: [eventId], references: [id])
   user      User?    @relation(fields: [userId], references: [id])
 
-  @@map("userEvents")
+  @@map("eventUsers")
 }
