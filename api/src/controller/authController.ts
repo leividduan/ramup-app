@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { db } from '../db/db';
 import { generateAccessToken } from '../services/generateAccessToken';
 
-export async function signin(req: Request, res: Response) {
+const signin = async (req: Request, res: Response) => {
   try {
     const {name, email, birthday, password} = req.body;
     const userWithSameEmail = await db.user.findUnique({where: {
@@ -29,7 +29,7 @@ export async function signin(req: Request, res: Response) {
   }
 }
 
-export async function signup(req: Request, res: Response) {
+const signup = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
@@ -55,3 +55,5 @@ export async function signup(req: Request, res: Response) {
     res.sendStatus(500);
   }
 }
+
+export default { signin, signup }
