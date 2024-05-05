@@ -163,4 +163,60 @@ const listMine = async (req: Request, res: Response) => {
   }
 }
 
-export default { create, update, remove, listAll, listById, listMine };
+const subscribe = async (req: Request, res: Response) => {
+  try {
+    const currentUser = (req as CustomRequest).user;
+    const eventId = req.params.id;
+
+    const event = await db.event.findFirst({where: { id: eventId }});
+
+    if (!event) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    const subscription = await db.eventUsers.create({
+      data: {
+        userId: currentUser!.id,
+        eventId: eventId
+      }
+    });
+
+    res.status(200).json(subscription);
+
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+}
+
+const unsubscribe = async (req: Request, res: Response) => {
+  try {
+    const currentUser = (req as CustomRequest).user;
+    const eventId = req.params.id;
+
+    const event = await db.event.findFirst({where: { id: eventId }});
+
+    if (!event) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    const subscription = await db.eventUsers.deleteMany({
+      where: {
+        userId: currentUser!.id,
+        eventId: eventId
+      }
+    });
+
+    if (subscription.count === 0) {
+      return res.status(400).json({ error: 'Subscription not found' });
+    }
+
+    res.sendStatus(204);
+
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+}
+
+export default { create, update, remove, listAll, listById, listMine, subscribe, unsubscribe };

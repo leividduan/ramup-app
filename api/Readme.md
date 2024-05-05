@@ -89,6 +89,21 @@
 - Response Format: JSON
 - Description: Creates a new event with the data sent in the request body.
 
+### POST /events/:id/subscribe - Subscribe to an Event
+
+- Method: POST
+- Authorization: JWT token required
+- Request Parameters: id (Event ID)
+- Response Format: JSON
+- Description: Subscribes the authenticated user to the specified event by its id. If the operation is successful, response includes the subscription record. If the event does not exist, the response will be a 404 error with a relevant message.
+
+### POST /events/:id/unsubscribe - Unsubscribe from an Event
+
+- Method: POST
+- Authorization: JWT token required
+- Request Parameters: id (Event ID)
+- Description: Unsubscribes the authenticated user from the specified event by its id. If the operation is successful, it will respond with a 204 status code. If the event does not exist or user is not already subscribed, the response will be an error with a relevant message.
+
 ### PUT /events/:id - Update Event
 
 - Method: PUT

@@ -10,6 +10,7 @@ import statusController from './controller/statusController';
 
 export const router = Router();
 //// Unprotected routes
+
 // Status
 router.get('/status', statusController.status);
 
@@ -25,6 +26,7 @@ router.get('/events', validateJwt, eventController.listAll);
 router.get('/events/mine', validateJwt, eventController.listMine);
 router.get('/events/:id', validateJwt, eventController.listById);
 router.post('/events', validateJwt, validateData(EventSchema), eventController.create);
+router.post('/events/:id/subscribe', validateJwt, eventController.subscribe);
+router.post('/events/:id/unsubscribe', validateJwt, eventController.unsubscribe);
 router.put('/events/:id', validateJwt, validateData(EventSchema), eventController.update);
 router.delete('/events/:id', validateJwt, eventController.remove);
-// Inscriptions
