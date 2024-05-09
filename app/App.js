@@ -1,32 +1,53 @@
-// App.js
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './pages/Login';
-import Cadastro from './pages/Cadastro';
+import Register from './pages/Register';
+import Logged from './pages/LoggedPage';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Stack.Navigator>
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Cadastro" component={Cadastro} />
-          {/* Add more screens and define navigation */}
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
-  );
+
+    return (
+        <NavigationContainer>
+            <View style={styles.container}>
+                <Stack.Navigator initialRouteName='Login'>
+                    <Stack.Screen 
+                        name='Login' 
+                        component={Login}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen 
+                        name='Register' 
+                        component={Register} 
+                        options={{
+                            headerTitle: '',
+                            headerTransparent: true,
+                            headerTintColor: '#FFF',
+                        }}
+                    />
+                    <Stack.Screen 
+                        name='Logged' 
+                        component={Logged} 
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                </Stack.Navigator>
+                <StatusBar style='auto'/>
+            </View>
+        </NavigationContainer>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
 });

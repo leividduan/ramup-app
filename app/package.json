@@ -6,21 +6,25 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "postinstall": "node react-native-map-web-fix.js"
   },
   "dependencies": {
-    "@react-navigation/native": "^6.1.17",
-    "@react-navigation/stack": "^6.3.29",
-    "expo": "~50.0.14",
-    "expo-status-bar": "~1.11.1",
+    "@react-navigation/bottom-tabs": "6.5.20",
+    "@react-navigation/native": "6.1.17",
+    "@react-navigation/stack": "6.3.29",
+    "expo": "51.0.0",
+    "expo-location": "17.0.1",
+    "expo-status-bar": "1.12.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.6",
-    "react-native-web": "~0.19.6",
-    "react-navigation": "^5.0.0"
+    "react-native": "0.74.1",
+    "react-native-maps": "1.15.1",
+    "react-native-svg": "15.2.0",
+    "react-native-web": "0.19.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@teovilla/react-native-web-maps": "0.9.5"
   },
   "private": true
 }

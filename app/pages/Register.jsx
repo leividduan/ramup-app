@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
 import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-
 const logo = require("../assets/adaptive-icon.png");
 
-export default function LoginPage() {
+export default function RegisterPage () {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPass, setConfirmPass] = useState("");
+    const [email, setEmail] = useState("");
     const navigation = useNavigation();
 
-    const handleLogin = () => {
-        if (username && password) {
-            navigation.navigate('Logged');
+    const register = () => {
+        if (username && email && password && password === confirmPass) {
+            // Envia informacoes pra API de cadastro
+            navigation.navigate('Login');
         } else {
             Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
         }
     };
-
-    const handleRegister = () => {
-        navigation.navigate('Register');
-    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -28,7 +26,15 @@ export default function LoginPage() {
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.input}
-                        placeholder='E-mail ou Usuário'
+                        placeholder='E-mail'
+                        value={email}
+                        onChangeText={setEmail}
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Usuário'
                         value={username}
                         onChangeText={setUsername}
                         autoCorrect={false}
@@ -43,27 +49,25 @@ export default function LoginPage() {
                         autoCorrect={false}
                         autoCapitalize='none'
                     />
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Confirmar Senha'
+                        secureTextEntry
+                        value={confirmPass}
+                        onChangeText={setConfirmPass}
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                    />
+                    
                 </View>
-                <View style={styles.rememberView}>
-                    <Pressable style={styles.forgotBtn}>
-                        <Text style={styles.forgotBtnText}>Esqueceu a senha?</Text>
-                    </Pressable>
-                </View>
-                <View style={styles.registerView}>
-                    <Text style={styles.registerText}>{`Não possui uma conta? `}</Text>
-                    <Pressable style={styles.registerBtn} onPress={handleRegister}>
-                        <Text style={styles.registerBtnText}>Cadastre-se!</Text>
-                    </Pressable>
-                </View>
-                <View style={styles.loginView}>
-                    <Pressable style={styles.button} onPress={handleLogin}>
-                        <Text style={styles.buttonText}>LOGIN</Text>
+                <View style={styles.buttonView}>
+                    <Pressable style={styles.button} onPress={register}>
+                        <Text style={styles.buttonText}>Cadastrar</Text>
                     </Pressable>
                 </View>
             </View>
         </SafeAreaView>
     );
-
 }
 
 const styles = StyleSheet.create({
@@ -98,44 +102,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         marginBottom: 15
     },
-
-
     forgetText: {
         fontSize: 11,
         color: "#fff",
         fontWeight: "bold",
         alignSelf: "center"
     },
-
-    forgotBtn: {
-        marginTop: -20,
-        width: 280,
-        height: 20,
-        alignSelf: "center",
-        justifyContent: "center",
-    },
-    forgotBtnText: {
-        color: "#fff",
-        fontSize: 12,
-        alignSelf: "center",
-        textDecorationLine: "underline",
-    },
-
-    registerView: {
-        justifyContent: "center",
-        flexDirection: "row",
-    },
-    registerText: {
-        color: "#fff",
-    },
-    registerBtn: {},
-    registerBtnText: {
-        color: "#fff",
-        fontWeight: 'bold',
-        textDecorationLine: "underline",
-    },
-
-
     button: {
         backgroundColor: "#0BCE83",
         borderColor: "gray",
@@ -148,8 +120,6 @@ const styles = StyleSheet.create({
         marginTop: 15, // Space between the inputs and the button
         width: '80%' // Make the button occupy 80% of the width
     },
-    
-    
     buttonText: {
         color: "#fff",
         fontSize: 18,
@@ -161,7 +131,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         color: "#fff",
     },
-    
     bottomContainer: {
         alignItems: 'center',
         marginBottom: 10, // Adjust the space between the inputs and the bottom container
