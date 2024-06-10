@@ -6,6 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Logged from './pages/LoggedPage';
+import EventHistoryPage from './pages/EventHistoryPage';
+import EventDetailPage from './pages/EventDetailPage';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +36,20 @@ export default function App() {
                     <Stack.Screen 
                         name='Logged' 
                         component={Logged} 
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen 
+                        name='EventHistoryPage' 
+                        component={EventHistoryPage}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen 
+                        name='EventDetailPage' 
+                        component={EventDetailPage}
                         options={{
                             headerShown: false,
                         }}
