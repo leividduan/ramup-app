@@ -3,11 +3,72 @@ import { SafeAreaView, View, Text, TouchableOpacity, FlatList, StyleSheet } from
 import { useNavigation } from '@react-navigation/native';
 
 const events = [
-    { id: '1', name: 'Evento 1', description: 'Descrição breve do evento 1', date: '2024-06-10', duration: '2 horas', rating: 4 },
-    { id: '2', name: 'Evento 2', description: 'Descrição breve do evento 2', date: '2024-06-11', duration: '3 horas', rating: 3 },
-    { id: '3', name: 'Evento 3', description: 'Descrição breve do evento 3', date: '2024-06-12', duration: '1 hora', rating: 5 },
-    // Adicione mais eventos conforme necessário
-];
+    {
+      name: "Car Enthusiast Meetup",
+      description: "A meetup for car enthusiasts to showcase their modified vehicles and share their passion for cars.",
+      city: "São Paulo",
+      state: "São Paulo",
+      country: "Brazil",
+      zipCode: "12345-678",
+      latitude: "-23.550520",
+      longitude: "-46.633308",
+      onlyAdults: false,
+      showUsers: true,
+      rating: 3
+    },
+    {
+      name: "Classic Car Show",
+      description: "An exhibition of classic cars from the 1960s and 1970s.",
+      city: "Rio de Janeiro",
+      state: "Rio de Janeiro",
+      country: "Brazil",
+      zipCode: "23456-789",
+      latitude: "-22.906847",
+      longitude: "-43.172896",
+      onlyAdults: false,
+      showUsers: true,
+      rating: 4
+    },
+    {
+      name: "Luxury Car Expo",
+      description: "A grand exhibition featuring the latest models of luxury cars from top brands.",
+      city: "New York",
+      state: "New York",
+      country: "USA",
+      zipCode: "10001-123",
+      latitude: "40.712776",
+      longitude: "-74.005974",
+      onlyAdults: true,
+      showUsers: false,
+      rating: 1
+    },
+    {
+      name: "Electric Vehicle Fair",
+      description: "An event showcasing the newest electric vehicles and innovations in EV technology.",
+      city: "San Francisco",
+      state: "California",
+      country: "USA",
+      zipCode: "94102-345",
+      latitude: "37.774929",
+      longitude: "-122.419418",
+      onlyAdults: false,
+      showUsers: true,
+      rating: 2
+    },
+    {
+      name: "Motorcycle Rally",
+      description: "A rally for motorcycle enthusiasts with events, contests, and a parade.",
+      city: "Austin",
+      state: "Texas",
+      country: "USA",
+      zipCode: "73301-567",
+      latitude: "30.267153",
+      longitude: "-97.743057",
+      onlyAdults: true,
+      showUsers: false,
+      rating: 3
+    }
+  ];
 
 const EventHistoryPage = () => {
     const navigation = useNavigation();

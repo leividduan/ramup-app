@@ -12,14 +12,17 @@ const EventDetailPage = () => {
         setRating(newRating); // Atualiza o estado com a nova avaliação
         console.log("Rating is: " + newRating);
     };
-
+    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.detailContainer}>
                 <Text style={styles.eventName}>{event.name}</Text>
                 <Text style={styles.eventDescription}>{event.description}</Text>
-                <Text style={styles.eventDetail}>Data: {event.date}</Text>
-                <Text style={styles.eventDetail}>Duração: {event.duration}</Text>
+                <Text style={styles.eventDetail}>Local: {event.city} - {event.state} - {event.country}</Text>
+                <Text style={styles.eventDetail}>CEP: {event.zipCode}</Text>
+                <Text style={styles.eventDetail}>Coordenadas: {event.latitude} e {event.longitude}</Text>
+                <Text style={styles.eventDetail}>Apenas Adultos: {event.onlyAdults ? 'Sim' : 'Não'}</Text>
+                <Text style={styles.eventDetail}>Mostrar Usuários: {event.showUsers ? 'Sim' : 'Não'}</Text>
                 <AirbnbRating 
                     count={5}
                     reviews={["Péssimo", "Ruim", "Ok", "Bom", "Excelente"]}
@@ -30,6 +33,7 @@ const EventDetailPage = () => {
             </View>
         </SafeAreaView>
     );
+    
 };
 
 const styles = StyleSheet.create({
