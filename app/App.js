@@ -31,7 +31,7 @@ export default function App() {
                         name='Register' 
                         component={Register} 
                         options={{
-                            headerTitle: '',
+                            headerTitle: 'Cadastro',
                             headerTransparent: true,
                             headerTintColor: '#FFF',
                         }}
@@ -47,7 +47,7 @@ export default function App() {
                         name='EventHistoryPage' 
                         component={EventHistoryPage}
                         options={{
-                            headerTitle: '',
+                            headerTitle: 'Histórico de eventos',
                             headerTransparent: true,
                             headerTintColor: '#FFF',
                         }}
@@ -56,7 +56,7 @@ export default function App() {
                         name='EventDetailPage' 
                         component={EventDetailPage}
                         options={{
-                            headerTitle: '',
+                            headerTitle: 'Detalhes do evento',
                             headerTransparent: true,
                             headerTintColor: '#FFF',
                         }}
@@ -65,7 +65,7 @@ export default function App() {
                         name='EventRegisterPage' 
                         component={EventRegisterPage}
                         options={{
-                            headerTitle: '',
+                            headerTitle: 'Cadastro de evento',
                             headerTransparent: true,
                             headerTintColor: '#FFF',
                         }}
