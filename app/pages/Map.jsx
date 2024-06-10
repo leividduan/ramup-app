@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import MapView from '../components/mymap';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
-import {  Alert, SafeAreaView, StyleSheet, View, Dimensions } from 'react-native';
+import {  Alert, SafeAreaView, StyleSheet, View, Dimensions, Platform } from 'react-native';
+import { MapContainer } from 'react-leaflet';
 
 const initialRegion = {
     latitude: 49.2576508,
@@ -13,6 +14,7 @@ const initialRegion = {
 
 export default function MapPage() {
     const [region, setRegion] = useState();
+    const isWeb = Platform.OS === 'web';
 
     const getCurrentPosition = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -35,12 +37,20 @@ export default function MapPage() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                <MapView
-                    provider={PROVIDER_GOOGLE}
-                    style={styles.map}
-                    region={region}
-                    initialRegion={initialRegion}
-                ></MapView>
+                {isWeb ? (
+                    <MapContainer
+                        center={[initialRegion.latitude, initialRegion.longitude]}
+                        zoom={13}
+                        style={styles.map}
+                    ></MapContainer>
+                ) : (
+                    <MapView
+                        provider={PROVIDER_GOOGLE}
+                        style={styles.map}
+                        region={region}
+                        initialRegion={initialRegion}
+                    ></MapView>
+                )}
             </View>
         </SafeAreaView>
     );

@@ -12,6 +12,7 @@ export default function LoginPage() {
     const handleLogin = () => {
         if (username && password) {
             navigation.navigate('Logged');
+            setPassword("");
         } else {
             Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
         }
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
 
     button: {
         backgroundColor: "#0BCE83",
+        borderRadius: 7,
         borderColor: "gray",
         alignItems: "center",
         justifyContent: "center",
