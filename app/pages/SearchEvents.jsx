@@ -10,7 +10,7 @@ export default function SearchPage() {
     };
 
     const handleRegisterEvent = () => {
-        console.log('Cadastrar eventos');
+        navigation.navigate('EventRegisterPage');
     };
 
     const handleLogout = () => {
