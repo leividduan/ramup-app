@@ -25,9 +25,6 @@ const EventHistoryPage = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                <Text style={styles.backButtonText}>Voltar</Text>
-            </TouchableOpacity>
             <FlatList
                 data={events}
                 renderItem={renderItem}
@@ -43,16 +40,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#7203FF',
         padding: 10,
-    },
-    backButton: {
-        padding: 10,
-        backgroundColor: '#ffffff',
-        borderRadius: 5,
-        marginBottom: 10
-    },
-    backButtonText: {
-        color: '#000',
-        fontWeight: 'bold',
     },
     card: {
         backgroundColor: '#FFFFFF',
@@ -70,6 +57,7 @@ const styles = StyleSheet.create({
         color: '#000',
     },
     listContent: {
+        marginTop: 50,
         paddingBottom: 20,
     },
 });
