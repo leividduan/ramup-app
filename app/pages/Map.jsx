@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
-import MapView from '../components/mymap';
+import React, { useEffect, useState } from 'react';
+import { Alert, Dimensions, Platform, SafeAreaView, StyleSheet, View } from 'react-native';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
-import {  Alert, SafeAreaView, StyleSheet, View, Dimensions, Platform } from 'react-native';
-import { MapContainer } from 'react-leaflet';
+import MapView from '../components/mymap';
 
 const initialRegion = {
     latitude: 49.2576508,

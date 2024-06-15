@@ -1,19 +1,51 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from 'react';
 import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import useAuth from "../hooks/useAuth";
+import { signup } from "../services/authService/signup";
 const logo = require("../assets/adaptive-icon.png");
 
 export default function RegisterPage () {
-    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
     const [email, setEmail] = useState("");
+    const [birthday, setBirthday] = useState('')
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const navigation = useNavigation();
+    const auth = useAuth();
 
-    const register = () => {
-        if (username && email && password && password === confirmPass) {
-            // Envia informacoes pra API de cadastro
-            navigation.navigate('Login');
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+    
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+    
+    const handleConfirm = (date) => {
+        const fullDate = new Date(date)
+        setBirthday(fullDate.toLocaleDateString("pt-BR"));
+        hideDatePicker();
+    };
+      
+    const register = async () => {
+        if (name && email && password && password === confirmPass) {
+            console.log('entrou');
+            const response = await signup({
+                name,
+                email,
+                birthday,
+                password
+            });
+            console.log(response);
+            if (response) {
+                auth.signin(response.data.token)
+                navigation.navigate('Login');
+            } else {
+                Alert.alert("Erro ao realizar o cadastro");
+            }
         } else {
             Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
         }
@@ -26,6 +58,14 @@ export default function RegisterPage () {
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.input}
+                        placeholder='Nome'
+                        value={name}
+                        onChangeText={setName}
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                    />
+                    <TextInput
+                        style={styles.input}
                         placeholder='E-mail'
                         value={email}
                         onChangeText={setEmail}
@@ -34,11 +74,18 @@ export default function RegisterPage () {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Usuário'
-                        value={username}
-                        onChangeText={setUsername}
+                        placeholder='Nascimento'
+                        value={birthday}
+                        onPress={showDatePicker}
                         autoCorrect={false}
+                        showSoftInputOnFocus={false}
                         autoCapitalize='none'
+                    />
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
                     />
                     <TextInput
                         style={styles.input}
