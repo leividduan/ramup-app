@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import useAuth from "../hooks/useAuth";
-import { signup } from "../services/authService/signup";
+import { signin } from "../services/authService/signin";
 const logo = require("../assets/adaptive-icon.png");
 
 export default function RegisterPage () {
@@ -31,9 +31,11 @@ export default function RegisterPage () {
     };
       
     const register = async () => {
-        if (name && email && password && password === confirmPass) {
-            console.log('entrou');
-            const response = await signup({
+        try {
+            if (!name || !email || !password || !(password === confirmPass)) {
+                Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
+            }
+            const response = await signin({
                 name,
                 email,
                 birthday,
@@ -46,9 +48,11 @@ export default function RegisterPage () {
             } else {
                 Alert.alert("Erro ao realizar o cadastro");
             }
-        } else {
-            Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
         }
+        catch (err) {
+            console.log(err);
+        }
+        
     };
 
     return (
