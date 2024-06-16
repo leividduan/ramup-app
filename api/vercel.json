@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "ramup-api",
+  "builds": [
+    {
+      "src": "index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.ts"
+    }
+  ]
+}
