@@ -1,19 +1,11 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
-import { Alert, Dimensions, Platform, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Alert, Dimensions, SafeAreaView, StyleSheet, View } from 'react-native';
 import { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapView from '../components/mymap';
 
-const initialRegion = {
-    latitude: 49.2576508,
-    longitude: -123.2639868,
-    latitudeDelta: 100,
-    longitudeDelta: 100,
-};
-
 export default function MapPage() {
     const [region, setRegion] = useState();
-    const isWeb = Platform.OS === 'web';
 
     const getCurrentPosition = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,7 +18,7 @@ export default function MapPage() {
           coords: { latitude, longitude },
         } = await Location.getCurrentPositionAsync();
     
-        setRegion({ latitude, longitude, latitudeDelta: 100, longitudeDelta: 100 });
+        setRegion({ latitude, longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 });
     };
 
     useEffect(() => {
@@ -36,20 +28,13 @@ export default function MapPage() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                {isWeb ? (
-                    <MapContainer
-                        center={[initialRegion.latitude, initialRegion.longitude]}
-                        zoom={13}
-                        style={styles.map}
-                    ></MapContainer>
-                ) : (
-                    <MapView
-                        provider={PROVIDER_GOOGLE}
-                        style={styles.map}
-                        region={region}
-                        initialRegion={initialRegion}
-                    ></MapView>
-                )}
+                <MapView
+                    provider={PROVIDER_GOOGLE}
+                    style={styles.map}
+                    region={region}
+                    initialRegion={region}
+                    showsUserLocation={true}
+                ></MapView>
             </View>
         </SafeAreaView>
     );
@@ -69,6 +54,6 @@ const styles = StyleSheet.create({
     },
     map: {
         width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height,
+        height: Dimensions.get("window").height/1.19,
     },
 });

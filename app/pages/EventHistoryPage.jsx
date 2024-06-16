@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const events = [
     {
+        id: "5",
       name: "Car Enthusiast Meetup",
       description: "A meetup for car enthusiasts to showcase their modified vehicles and share their passion for cars.",
       city: "São Paulo",
@@ -17,6 +18,7 @@ const events = [
       rating: 3
     },
     {
+        id: "4",
       name: "Classic Car Show",
       description: "An exhibition of classic cars from the 1960s and 1970s.",
       city: "Rio de Janeiro",
@@ -30,6 +32,7 @@ const events = [
       rating: 4
     },
     {
+        id: "3",
       name: "Luxury Car Expo",
       description: "A grand exhibition featuring the latest models of luxury cars from top brands.",
       city: "New York",
@@ -43,6 +46,7 @@ const events = [
       rating: 1
     },
     {
+        id: "2",
       name: "Electric Vehicle Fair",
       description: "An event showcasing the newest electric vehicles and innovations in EV technology.",
       city: "San Francisco",
@@ -56,6 +60,7 @@ const events = [
       rating: 2
     },
     {
+      id: "1",
       name: "Motorcycle Rally",
       description: "A rally for motorcycle enthusiasts with events, contests, and a parade.",
       city: "Austin",
