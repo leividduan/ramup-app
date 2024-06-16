@@ -3,7 +3,7 @@ import React, { createContext, useCallback, useState } from 'react';
 
 export const AuthContext = createContext({});
 
-export function AuthProvider({ children }) {
+export default function AuthProvider({ children }) {
   const [signedIn, setSignedIn] = useState(async () => {
     const storedAccessToken = await AsyncStorage.getItem('ramup-token');
 

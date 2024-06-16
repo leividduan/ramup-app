@@ -1,20 +1,30 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from 'react';
 import { Alert, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
+import signup from "../services/authService/signup";
 
 const logo = require("../assets/adaptive-icon.png");
 
 export default function LoginPage() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
+    const auth = useAuth();
 
-    const handleLogin = () => {
-        if (username && password) {
-            navigation.navigate('Logged');
-            setPassword("");
-        } else {
-            Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
+    const handleLogin = async () => {
+        try {
+            if (!email || !password) {
+                Alert.alert("Por favor, insira um nome de usuário e senha válidos.");
+            }
+            const response = await signup({ email, password })
+            if (response) {
+                auth.signin(response.data.token)
+                navigation.navigate('Logged');
+                setPassword("");
+            }
+        }
+        catch (err) {
+            Alert.alert("Erro ao realizar o login.");
         }
     };
 
@@ -29,9 +39,9 @@ export default function LoginPage() {
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.input}
-                        placeholder='E-mail ou Usuário'
-                        value={username}
-                        onChangeText={setUsername}
+                        placeholder='E-mail'
+                        value={email}
+                        onChangeText={setEmail}
                         autoCorrect={false}
                         autoCapitalize='none'
                     />

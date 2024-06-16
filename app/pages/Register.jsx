@@ -41,7 +41,6 @@ export default function RegisterPage () {
                 birthday,
                 password
             });
-            console.log(response);
             if (response) {
                 auth.signin(response.data.token)
                 navigation.navigate('Login');
